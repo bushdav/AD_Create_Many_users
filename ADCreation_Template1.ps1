@@ -4,9 +4,9 @@ foreach ($User in $ADUsers)
 
        $Username    = $User.username
        $Password    = $User.password
-       $Firstname   = $User.first
-       $Lastname    = $User.last
-       $Principal   = $User.principal
+       $Firstname   = $User.Firstname
+       $Lastname    = $User.Lastname
+       $Principal   = $User.Userprincipal_name
        $Path	    = $User.path
 
        #Check if the user account already exists in AD
@@ -18,6 +18,7 @@ foreach ($User in $ADUsers)
        else
        {
               #If a user does not exist then create a new user account
+              #options are limitless, you can add any at your convenience
               New-ADUser `
             -SamAccountName $Username `
             -UserPrincipalName $Principal `
