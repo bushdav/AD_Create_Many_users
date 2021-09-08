@@ -1,0 +1,13 @@
+---- Get users with respective groups
+  Get-ADUser -Filter * -Properties DisplayName,memberof | % {
+   New-Object PSObject -Property @{
+ UserName = $_.DisplayName
+ Groups = ($_.memberof | Get-ADGroup | Select -ExpandProperty Name) -join ","
+ }
+ } | Select UserName,Groups
+ 
+ 
+ ------- Get users and properties
+ 
+ get-ADUser -Filter * -Properties LastLogOnDate, PassWordNeverExpires, PasswordLastSet, BadLogonCount, AccountExpirationDate, Modified,DisplayName,memberof 
+ | Export-Csv -Path "C:\Users\adminbushayija\Desktop\users.csv"
